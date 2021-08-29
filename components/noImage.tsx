@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import { FaImage } from "react-icons/fa";
+import { RiImageFill } from "react-icons/ri";
 
 import styles from '../styles/Style.module.css';
 
@@ -16,7 +16,7 @@ const NoImage: NextPage = () => {
 
       <main className={styles.main}>
         <article className={styles.card}>
-          <FaImage  size={60} className={styles.image}/>
+          <RiImageFill  size={200} color='#c2c2c2' className={styles.image}/>
           <h3 className={styles.imageTitle}>No image</h3>
         </article>
         <AddButton />

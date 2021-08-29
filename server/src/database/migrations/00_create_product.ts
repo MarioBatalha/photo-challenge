@@ -1,9 +1,8 @@
-import Knex from 'knex';
+import { Knex } from 'knex';
 
 export async function up(knex: Knex) {
-    return knex.schema.createTable('product', table => {
+    return knex.schema.createTable('products', table => {
         table.increments('id').primary();
-        table.string('description', 50).notNullable();
         table.string('image_url', 100).notNullable();
     });
 }

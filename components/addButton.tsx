@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       <button 
       className={styles.addButton}
       onClick={handleAddProduct}>
-        <BiPlus size={80} color='#25D366' />
+        <BiPlus size={100} color='#25D366' />
       </button>
     </div>
   );

@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import connection from '../database/connection';
 
 module.exports = {
@@ -21,5 +22,14 @@ module.exports = {
        } catch (error) {
            return res.status(400).send({ error: 'product upload failed'})
        }
-    }
+    },
+
+    async delete(req: Request, res: Response) {
+        try {
+         
+         
+        } catch (error) {
+            return res.status(400).send({ error: 'You can´t delete this image'})
+        }
+     }
   }   
