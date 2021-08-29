@@ -48,7 +48,7 @@ Or
 
 Executes the test
 
-    npmn test
+    npm test
 
 
 ## Deploy
