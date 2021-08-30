@@ -1,5 +1,4 @@
-import {Request, Response} from 'express';
-const multer = require('multer');
+import { Request, Response } from 'express';
 
 import connection from '../database/connection';
 
@@ -15,33 +14,17 @@ module.exports = {
 
     async create(req: Request, res: Response) {
        try {
-        const storage = multer.diskStorage({
-            destination: function (req: any, file: any, cb: any) {
-                cb(null, './uploads/')
-            },
-            
-            filename: function (req: any, file: any, cb: any) {
-                cb(null, file.originalname)
-            }
-        });
+        const { image_url } = req.body;        
 
-        const fileFilter = (req: any,file: any,cb: any) => {
-            if(file.mimetype === "image/jpg"  || 
-               file.mimetype ==="image/jpeg"  || 
-               file.mimetype ===  "image/png"){
-             
-            cb(null, true);
-           }else{
-              cb(new Error("Image uploaded is not of type jpg/jpeg or png"),false);
-        }
-      }
-        const upload = multer({storage: storage, fileFilter : fileFilter});
-
-       const { image_url } = req.body;
+        const imageExists = await connection('products').where('image_url', image_url).first(); 
         
-        const imageUploadToDatabase = await connection('products').insert(req.body);
+        if(imageExists){
+            return res.status(400).send({ error: 'This image already exist'})
+        }
+       
+        const product = await connection('products').insert(req.body);
 
-        return res.json(`{imageUploadToDatabase}Image was successful uploaded`);
+        return res.json(`Product ${product} was successful uploaded`);
     } catch (error) {
            return res.status(400).send({ error: 'Image upload failed'})
        }
@@ -52,10 +35,6 @@ module.exports = {
          const { id } = req.body;
          
         const product = await connection('products').where('id', id).del();
-
-        if(product) {
-            return res.status(400).send({ error: 'Image already deleted'})
-        }
 
          return res.json(`Product was deleted`);
         } catch (error) {

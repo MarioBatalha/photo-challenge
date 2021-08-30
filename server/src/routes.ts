@@ -3,15 +3,14 @@ const express = require('express');
 const { celebrate, Segments, Joi } = require('celebrate');
 const routes = express.Router();
 
+const { upload, uploadImage } = require('./controllers/controllerUpload');
+
 const controllerProducts = require('./controllers/controllersProducts');
-import { Request, Response } from 'express';
 
 //Routes
 routes.get('/products', controllerProducts.index);
 
-routes.post('/AddProduct', (req: Request , res: Response) => {
-    console.log('Hello');
-});
+routes.post('/AddProduct', uploadImage, upload, controllerProducts.create);
 
 routes.delete('/RemoveProduct', controllerProducts.remove);
 

@@ -36,9 +36,10 @@ const Card: NextPage = () => {
 
   const handleRemoveProduct = () => {
     try {
-      const removeAPI = 'http://localhost:3333/RemoveProduct'
-      axios.delete(removeAPI)
-      .then(() => setProduct('Delete successful'));    
+      axios.delete(`http://localhost:3333/products/${product.id}.json`)
+      .then((res) => {
+        return res.data;
+      })   
   }catch(error) {
     console.log('Error to delete');
   }

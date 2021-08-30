@@ -7,9 +7,9 @@ import { BiPlus } from "react-icons/bi";
 import styles from '../styles/Style.module.css';
 
 const Home: NextPage = () => {
-  const [file, setFile] = useState('');
+  const [file, setFile] =  useState<any>([]);
 
-  const handleAddProduct = (e: any) => {
+  const handleAddProduct = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     const data = new FormData();
@@ -45,7 +45,12 @@ const Home: NextPage = () => {
           type="file"
           name="image_url"
           className={styles.uploadBox}
-          onChange={handleInputChange} />    
+          onChange={handleInputChange} /> 
+          <button
+          type='submit' 
+          className={styles.button}
+          >add image
+          </button>   
          </form>
       </div>
     </div>
