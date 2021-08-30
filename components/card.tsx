@@ -6,10 +6,9 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import styles from '../styles/Style.module.css';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import AddButton from '../components/addButton';
+import AddButton from './addInput';
 
-import first from '../server/src/asset/img/01.jpg';
-
+import first from '../server/src/public/images/01.jpg';
 interface Products {
   ( 
     id?: number,

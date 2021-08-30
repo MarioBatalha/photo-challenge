@@ -67,16 +67,46 @@
   opacity: 0.7;
   transition: 0.2s;
 }
-
-.addButton {
-  padding: 30px;
-  margin: 5px;
-  max-width: 200px;
-  max-height: 200px;
-  background: #fff;
-  border: none;
+.buttonWrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
   border-radius: 100%;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background: #fff;
+}
+
+.label {
+  z-index: 0;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  cursor: pointer;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.uploadBox {
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 50px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.icon {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 15px;
 }
 
 .imageTitle {

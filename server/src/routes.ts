@@ -10,6 +10,6 @@ routes.get('/products', controllerProducts.index);
 
 routes.post('/AddProduct', controllerProducts.create);
 
-routes.post('/RemoveProduct', controllerProducts.create);
+routes.delete('/RemoveProduct', controllerProducts.remove);
 
 export default routes;
