@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 
@@ -20,39 +20,49 @@ interface Products {
 }
 
 const Card: NextPage = () => {
+  const [file, setFile] = useState<any>([]);
+  const [product, setProduct] = useState<any>([]);;
 
-  const api = 'http://localhost:3333/products';
+  useEffect(() => {
+    const api = 'http://localhost:3333/products';
 
-  axios.get(api).then(res => {
-   return { products: res.data }
-  }).catch(err => {
-    alert(`No image found`);
-  });
-
+    axios.get(api).then(res => {
+      setFile(res.data);
+     }).catch(err => {
+       console.log(`No image founded`);
+     });
+   
+  }, []);
 
   const handleRemoveProduct = () => {
-    alert('Tem a certeza que pretende remover esse produto?');
+    try {
+      const removeAPI = 'http://localhost:3333/RemoveProduct'
+      axios.delete(removeAPI)
+      .then(() => setProduct('Delete successful'));    
+  }catch(error) {
+    console.log('Error to delete');
   }
+}
 
-  const handleListProduct = () => {
-    alert('Lista de produtos');
-  }
   return ( 
     <div className={styles.container}>
      <Header /> 
       <main className={styles.main}> 
-      {products.map}
+      {file.map((item: any) => (
         <article 
+        key={item.id}
           className={styles.card}>
           <Image
            src={first}
            className={styles.image}/>
+           <h4 className={styles.imageTitle}>{item.image_url}</h4>
           <button 
            className={styles.removeButton}
            onClick={handleRemoveProduct}>
             <AiOutlineCloseCircle size={30} />
           </button>
         </article> 
+      ))}
        <AddButton />
       </main>
 
