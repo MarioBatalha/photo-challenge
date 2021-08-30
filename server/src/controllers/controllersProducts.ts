@@ -15,39 +15,33 @@ module.exports = {
 
     async create(req: Request, res: Response) {
        try {
-        const { image_url } = req.body;        
-
-        const imageExists = await connection('products').where('image_url', image_url).first(); 
-        
-        if(imageExists){
-            return res.status(400).send({ error: 'This image already exist'})
-        }
-
-        const multerConfig = multer.diskStorage({
-            destination: (req: Request, file: any, callback: any) => {
-                callback(null, './src/public/images/products');
-            }, filename(req: Request, file: any, callback: any)  {
-                const ext = file.mimetype.split('/')[1];
-                callback(null, `image.${Date.now()}.${ext}`)
+        const storage = multer.diskStorage({
+            destination: function (req: any, file: any, cb: any) {
+                cb(null, './uploads/')
+            },
+            
+            filename: function (req: any, file: any, cb: any) {
+                cb(null, file.originalname)
             }
         });
 
-        const isImage = (req: Request, file: any, callback: any) => {
-            if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
-                callback(null, true);
-            }else{
-                callback(new Error('Only jpeg and png images are allowed'), false);
-            }
+        const fileFilter = (req: any,file: any,cb: any) => {
+            if(file.mimetype === "image/jpg"  || 
+               file.mimetype ==="image/jpeg"  || 
+               file.mimetype ===  "image/png"){
+             
+            cb(null, true);
+           }else{
+              cb(new Error("Image uploaded is not of type jpg/jpeg or png"),false);
         }
+      }
+        const upload = multer({storage: storage, fileFilter : fileFilter});
 
-        const upload = multer({
-            storage: multerConfig,
-            fileFilter: isImage,
-        }).single('image_url');
+       const { image_url } = req.body;
         
-        const product = await connection('products').insert(req.body);
+        const imageUploadToDatabase = await connection('products').insert(req.body);
 
-        return res.json(`Product ${product} was successful uploaded`);
+        return res.json(`{imageUploadToDatabase}Image was successful uploaded`);
     } catch (error) {
            return res.status(400).send({ error: 'Image upload failed'})
        }

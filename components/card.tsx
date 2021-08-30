@@ -1,5 +1,7 @@
 import type { NextPage } from 'next';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
 
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
@@ -18,13 +20,28 @@ interface Products {
 }
 
 const Card: NextPage = () => {
+
+  const api = 'http://localhost:3333/products';
+
+  axios.get(api).then(res => {
+   return { products: res.data }
+  }).catch(err => {
+    alert(`No image found`);
+  });
+
+
   const handleRemoveProduct = () => {
     alert('Tem a certeza que pretende remover esse produto?');
   }
-  return (
+
+  const handleListProduct = () => {
+    alert('Lista de produtos');
+  }
+  return ( 
     <div className={styles.container}>
      <Header /> 
-      <main className={styles.main}>    
+      <main className={styles.main}> 
+      {products.map}
         <article 
           className={styles.card}>
           <Image
@@ -35,41 +52,7 @@ const Card: NextPage = () => {
            onClick={handleRemoveProduct}>
             <AiOutlineCloseCircle size={30} />
           </button>
-        </article>
-        <article 
-          className={styles.card}>
-          <Image
-           src={first}
-           className={styles.image}/>
-          <button 
-           className={styles.removeButton}
-           onClick={handleRemoveProduct}>
-           <AiOutlineCloseCircle size={30} />
-          </button>
-        </article>
-        <article 
-          className={styles.card}>
-          <Image
-           src={first}
-           className={styles.image}/>
-          <button 
-           className={styles.removeButton}
-           onClick={handleRemoveProduct}>
-            <AiOutlineCloseCircle size={30} />
-          </button>
-        </article>
-        <article 
-          className={styles.card}>
-          <Image
-           src={first}
-           className={styles.image}/>
-          <button 
-           className={styles.removeButton}
-           onClick={handleRemoveProduct}>
-            <AiOutlineCloseCircle size={30} />
-          </button>
-        </article>
-
+        </article> 
        <AddButton />
       </main>
 
