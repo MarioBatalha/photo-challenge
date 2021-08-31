@@ -10,7 +10,7 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import AddButton from './addInput';
 
-import first from '../server/src/public/images/01.jpg';
+import first from '../server/src/asset/img/01.jpg';
 interface Products {
   ( 
     id?: number,
