@@ -14,20 +14,17 @@ const imageLimiter = {
     fileSize: 1000000 // 1000000 Bytes = 1 MB
   },
 
-const filterImage = (req, file, cb) => {
+/*const filterImage = (req, file, cb) => {
     if (!file.originalname.match(/\.(png|jpg)$/)) { 
        // upload only png and jpg format
        return cb(new Error('Please upload a Image'))
      }
    cb(undefined, true)
-}
+}*/
 
 
  upload = multer({
     dest: 'public/',
-    storage: multerConfig,
-    limits: imageLimiter,
-    fileFilter: filterImage,
     }
 );
 
