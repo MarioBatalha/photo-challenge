@@ -158,7 +158,8 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    font-size: 14pt;
+    font-size: 18pt;
+    padding: 20px;
   }
 
   .main {
