@@ -37,7 +37,7 @@ const Card: NextPage = () => {
     try {
       if(window.confirm('Você tem certeza que deseja deletar essa imagem?')){
 
-        axios.delete(`http://localhost:3333/products/${product.id}.json`)
+        axios.delete(`http://localhost:3333/products/${product.id}`)
         .then((res) => {
           return res.data;
         })   
