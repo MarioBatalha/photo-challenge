@@ -7,10 +7,12 @@ const { upload, uploadImage } = require('./controllers/controllerUpload');
 
 const controllerProducts = require('./controllers/controllersProducts');
 
-//Routes
+
 routes.get('/products', controllerProducts.index);
 
-routes.post('/AddProduct', upload, uploadImage, controllerProducts.create,);
+//routes.post('/AddProductToCurrentDirectory', upload, uploadImage);
+
+routes.post('/AddProduct', controllerProducts.create);
 
 routes.delete('/RemoveProduct', controllerProducts.remove);
 

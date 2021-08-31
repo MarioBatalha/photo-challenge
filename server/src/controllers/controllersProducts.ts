@@ -14,7 +14,7 @@ module.exports = {
 
     async create(req: Request, res: Response) {
        try {
-        const { image_url } = req.body;        
+        const image_url = req.body;        
 
         const imageExists = await connection('products').where('image_url', image_url).first(); 
         
@@ -38,7 +38,7 @@ module.exports = {
 
          return res.json(`Product was deleted`);
         } catch (error) {
-            return res.status(400).send({ error: 'You cant´t delete this image'})
+            return res.status(400).send({ error: `You cant´t delete image with id`})
         }
      }
   }   
