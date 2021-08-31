@@ -48,7 +48,6 @@ const Home: NextPage = () => {
         const acct = results[0];
         const perm = results[1];
       });
-
   };
 
   const handleInputChange = (e: any) => {

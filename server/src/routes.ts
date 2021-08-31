@@ -10,7 +10,7 @@ const controllerProducts = require('./controllers/controllersProducts');
 
 routes.get('/products', controllerProducts.index);
 
-routes.post('/AddProductToCurrentDirectory', upload, uploadImage);
+routes.post('/AddProductToCurrentDirectory', uploadImage, upload);
 
 routes.post('/AddProduct', controllerProducts.create);
 

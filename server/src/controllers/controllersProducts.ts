@@ -7,25 +7,24 @@ module.exports = {
     const products = await connection('products').select('*')
 
     if(!products){
-        return res.status(401).send({ error: 'This product not exists'})
+        return res.status(401).send({ error: 'No products available'})
     }
         return res.json(products);
     },
 
     async create(req: Request, res: Response) {
        try {
-        const image_url = req.body;        
+           const image_url = req.body;
 
-        const imageExists = await connection('products').where('image_url', image_url).first(); 
-        
-        if(imageExists){
-            return res.status(400).send({ error: 'This image already exist'})
-        }
-       
-        const product = await connection('products').insert(req.body);
+           const imageExists = await connection('products').where('image_url', image_url).first();
 
-        return res.json(`Product ${product} was successful uploaded`);
-    } catch (error) {
+           if (!imageExists) {
+               const product = await connection('products').insert(req.body);
+
+               return res.json(`Product ${product} was successful uploaded`);
+           }
+           return res.status(400).send({ error: 'This image already exist'});
+       } catch (error) {
            return res.status(400).send({ error: 'Image upload failed'})
        }
     },
