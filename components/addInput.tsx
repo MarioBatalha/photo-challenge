@@ -33,9 +33,7 @@ const Home: NextPage = () => {
     const handleUploadImageToDatabase = () => {
       const api = 'http://localhost:3333/AddProduct';
 
-      return  axios.post(api, {
-        image_url: file,
-      }).then(res => {
+      return  axios.post(api, data, config).then(res => {
         alert(`successfully image upload to database`);
       }).catch(err => {
         alert(`Error to upload image to database`);
