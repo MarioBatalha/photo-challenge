@@ -39,7 +39,7 @@ const multer = require('multer');
       fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(png|jpg)$/)) { 
            // upload only png and jpg format
-           return cb(new Error('Please upload a Image'))
+           return cb(new Error('Please upload an image'))
          }
        cb(undefined, true)
     },

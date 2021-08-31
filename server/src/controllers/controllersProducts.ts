@@ -14,17 +14,18 @@ module.exports = {
 
     async create(req: Request, res: Response) {
        try {
-           const image_url = req.body;
+        const image_url= req.body;        
 
-           const imageExists = await connection('products').where('image_url', image_url).first();
+        const imageExists = await connection('products').where('image_url', image_url).first(); 
+        
+        if(!imageExists){
+            return res.status(400).send({ error: 'This image already exist'})
+        }
+       
+        const product = await connection('products').insert(req.body);
 
-           if (!imageExists) {
-               const product = await connection('products').insert(req.body);
-
-               return res.json(`Product ${product} was successful uploaded`);
-           }
-           return res.status(400).send({ error: 'This image already exist'});
-       } catch (error) {
+        return res.json(`Product ${product} was successful uploaded`);
+    } catch (error) {
            return res.status(400).send({ error: 'Image upload failed'})
        }
     },
