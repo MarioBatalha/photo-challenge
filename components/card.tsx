@@ -30,12 +30,10 @@ const Card: NextPage = () => {
       setFile(res.data);
      }).catch(err => {
        console.log(`No image founded`);
-     });
-   
+     });   
   }, []);
 
-  const handleRemoveProduct = () => {
-    
+  const handleRemoveProduct = () => {    
     try {
       if(window.confirm('Você tem certeza que deseja deletar essa imagem?')){
 
