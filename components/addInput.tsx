@@ -14,20 +14,39 @@ const Home: NextPage = () => {
 
     const data = new FormData();
     data.append('image_url', file);
-
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
       }, 
     };
 
-    const api = 'http://localhost:3333/AddProduct';
+    const handleUploadImageToCurrentDirectory = () => {
+      const api = 'http://localhost:3333/AddProductToCurrentDirectory';
 
-    axios.post(api, data, config).then(res => {
-      alert(`Image added successfully`);
-    }).catch(err => {
-      alert(`Error to add image`);
-    })
+      return  axios.post(api, data, config).then(res => {
+        alert(`successfully image upload to current directory`);
+      }).catch(err => {
+        alert(`Error to upload image to current directory`);
+      })
+    }
+    
+    const handleUploadImageToDatabase = () => {
+      const api = 'http://localhost:3333/AddProduct';
+
+      return  axios.post(api, data, config).then(res => {
+        alert(`successfully image upload to database`);
+      }).catch(err => {
+        alert(`Error to upload image to database`);
+      })
+     
+    }
+    
+    Promise.all([handleUploadImageToCurrentDirectory(), handleUploadImageToDatabase()])
+      .then(function (results) {
+        const acct = results[0];
+        const perm = results[1];
+      });
+
   };
 
   const handleInputChange = (e: any) => {
