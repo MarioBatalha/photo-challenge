@@ -26,7 +26,7 @@ const Home: NextPage = () => {
     axios.post(api, data, config).then(res => {
       alert(`Image added successfully`);
     }).catch(err => {
-      alert(`Error adding image`);
+      alert(`Error adding image to database but image was added in current directory`);
     })
   };
 

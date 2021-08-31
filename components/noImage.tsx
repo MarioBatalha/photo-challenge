@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import { RiImageFill } from "react-icons/ri";
 
 import styles from '../styles/Style.module.css';
@@ -7,7 +6,6 @@ import styles from '../styles/Style.module.css';
 import Header from '../components/header';
 import AddButton from './addInput';
 import Footer from '../components/footer';
-import Icon from '../server/src/asset/img/images.png';
 
 const NoImage: NextPage = () => {
   return (
