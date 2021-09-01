@@ -1,4 +1,4 @@
-#Photo-challenge
+<h1>Photo challenge</h1>
  
  This is a React app using Next SSR that allows us to upload, delete, and get images to current directory and databse.
 
